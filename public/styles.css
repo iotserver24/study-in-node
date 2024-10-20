@@ -1,0 +1,666 @@
+:root {
+    --bg-color: #f0f4f8;
+    --text-color: #333;
+    --accent-color: #4a90e2;
+    --secondary-color: #82c91e;
+    --tertiary-color: #fcc419;
+    --box-bg-color: rgba(255, 255, 255, 0.1);
+    --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+    overflow-x: hidden;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Remove or comment out the line below */
+    /* background-image: url('https://source.unsplash.com/1600x900/?nature,study'); */
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    z-index: -1;
+    transition: background-image 0.5s ease;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: var(--box-bg-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    font-size: 2.5em;
+    color: var(--accent-color);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.theme-toggle button, .background-selector button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle button:hover, .background-selector button:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-2px);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.virtual-plant, .interaction {
+    flex: 1;
+}
+
+.dashboard, .virtual-plant, .interaction {
+    background-color: var(--box-bg-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.dashboard:hover, .virtual-plant:hover, .interaction:hover {
+    transform: translateY(-5px);
+}
+
+.timer-settings, .timer, .music-player {
+    margin-bottom: 20px;
+}
+
+.timer-settings input {
+    width: 60px;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+.timer-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.timer-background, .timer-progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.timer-background {
+    stroke: rgba(255, 255, 255, 0.2);
+}
+
+.timer-progress {
+    stroke: var(--accent-color);
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+#timerDisplay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-2px);
+}
+
+.virtual-plant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 250px; /* Reduce height slightly */
+    position: relative;
+    overflow: hidden; /* Hide overflow */
+}
+
+#plant {
+    width: 80px; /* Decrease width */
+    height: 120px; /* Decrease height */
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.5s ease;
+}
+
+.plant-pot {
+    width: 40px;
+    height: 30px;
+    background-color: #8B4513;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.plant-stem {
+    width: 4px;
+    height: 0;
+    background-color: #4CAF50;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: height 0.5s ease;
+}
+
+.plant-leaf {
+    width: 20px;
+    height: 10px;
+    background-color: #8BC34A;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.plant-leaf.left {
+    transform: rotate(-45deg);
+    left: calc(50% - 15px);
+}
+
+.plant-leaf.right {
+    transform: rotate(45deg);
+    right: calc(50% - 15px);
+}
+
+.plant-flower {
+    width: 25px;
+    height: 25px;
+    background-color: #FFC107;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+#focusMeter {
+    width: 80%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#focusMeter::before {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.interaction {
+    grid-column: 1 / -1;
+}
+
+#chatWindow {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#chatInput {
+    width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+#sendMessage {
+    width: 60px;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #777;
+    background-color: var(--box-bg-color);
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+}
+
+/* Dark theme */
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --accent-color: #3a7bc8;
+    --box-bg-color: rgba(26, 26, 26, 0.7);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes growPlant {
+    from { transform: scale(0.5); }
+    to { transform: scale(1); }
+}
+
+.dashboard, .virtual-plant, .interaction {
+    animation: fadeIn 0.5s ease-out, growPlant 0.5s ease-out;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .right-column {
+        gap: 20px;
+    }
+
+    .dashboard, .virtual-plant, .interaction {
+        width: 100%;
+    }
+
+    .timer-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    #timerDisplay {
+        font-size: 2em;
+    }
+
+    #plant {
+        width: 120px;
+        height: 180px;
+    }
+}
+
+#changeBackground {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#changeBackground:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-2px);
+}
+
+/* Add these styles to your existing CSS file */
+.music-player {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.music-player h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.music-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.music-controls button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.music-controls button:hover {
+    background-color: #3a7bc8;
+    transform: scale(1.1);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#volumeControl {
+    flex-grow: 1;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#musicProgress {
+    flex-grow: 1;
+}
+
+#nowPlaying {
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Existing styles for input[type="range"] remain unchanged */
+
+/* Add Friend Email Prompt Styles */
+.friend-email-prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.prompt-content {
+    background-color: var(--box-bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.prompt-content h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.prompt-content input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+}
+
+.prompt-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.prompt-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#sendFriendRequest {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+#cancelFriendRequest {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+#sendFriendRequest:hover, #cancelFriendRequest:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive design improvements */
+@media (max-width: 1200px) {
+    .app-container {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .right-column {
+        gap: 20px;
+    }
+
+    .dashboard, .virtual-plant, .interaction {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 15px;
+    }
+
+    .timer-circle {
+        width: 180px;
+        height: 180px;
+    }
+
+    #timerDisplay {
+        font-size: 1.8em;
+    }
+
+    .timer-settings input {
+        width: 50px;
+    }
+
+    .music-player {
+        padding: 15px;
+    }
+
+    .music-controls {
+        flex-wrap: wrap;
+    }
+
+    #plant {
+        width: 100px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .app-container {
+        padding: 5px;
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .timer-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    #timerDisplay {
+        font-size: 1.5em;
+    }
+
+    .dashboard, .virtual-plant, .interaction {
+        padding: 15px;
+    }
+
+    .music-player h3 {
+        font-size: 1.2em;
+    }
+
+    .volume-control, .progress-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #volumeControl, #musicProgress {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .prompt-content {
+        max-width: 90%;
+    }
+}
+
+/* Improve input and button styles for touch devices */
+@media (hover: none) {
+    button, input[type="number"], input[type="range"] {
+        min-height: 44px;
+    }
+
+    input[type="range"] {
+        width: 100%;
+    }
+}
+
+/* Adjust font sizes for smaller screens */
+@media (max-width: 400px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+}
+
+/* Ensure content is readable on very small screens */
+@media (max-width: 320px) {
+    .timer-settings, .timer, .music-player {
+        font-size: 0.9em;
+    }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Flow - Study Together</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="app-container">
+        <header>
+            <h1>Focus Flow</h1>
+            <div class="theme-toggle">
+                <button id="lightTheme">Light</button>
+                <button id="darkTheme">Dark</button>
+            </div>
+        </header>
+        <main>
+            <section class="dashboard">
+                <div class="timer-settings">
+                    <h2>Timer Settings</h2>
+                    <label for="studyTime">Study Time (minutes):</label>
+                    <input type="number" id="studyTime" value="25" min="1" max="120">
+                    <label for="breakTime">Break Time (minutes):</label>
+                    <input type="number" id="breakTime" value="5" min="1" max="30">
+                </div>
+                <div class="timer">
+                    <h2>Study Session</h2>
+                    <div class="timer-circle">
+                        <svg width="200" height="200">
+                            <circle class="timer-background" cx="100" cy="100" r="90" />
+                            <circle class="timer-progress" cx="100" cy="100" r="90" />
+                        </svg>
+                        <div id="timerDisplay">25:00</div>
+                    </div>
+                    <button id="startTimer">Start</button>
+                    <button id="restartTimer">Restart</button>
+                </div>
+                <div class="music-player">
+                    <h3>Background Music</h3>
+                    <audio id="backgroundMusic">
+                        <source src="1.mp3" type="audio/mpeg">
+                    </audio>
+                    <div class="music-controls">
+                        <button id="playMusic"><i class="fas fa-play"></i></button>
+                        <button id="changeMusic"><i class="fas fa-random"></i> Change Music</button>
+                    </div>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div class="progress-container">
+                        <span id="currentTime">0:00</span>
+                        <input type="range" id="musicProgress" min="0" max="100" value="0">
+                        <span id="duration">0:00</span>
+                    </div>
+                    <p id="nowPlaying">Now Playing: Track 1</p>
+                </div>
+            </section>
+            <div class="right-column">
+                <section class="virtual-plant">
+                    <h2>Focus Plant</h2>
+                    <div id="plant">
+                        <div class="plant-pot"></div>
+                        <div class="plant-stem"></div>
+                        <div class="plant-leaf left"></div>
+                        <div class="plant-leaf right"></div>
+                        <div class="plant-flower"></div>
+                    </div>
+                    <div id="focusMeter"></div>
+                    <p id="focusDisplay">Focus: 100%</p>
+                </section>
+                <section class="interaction">
+                    <button id="toggleChat">Toggle Chat</button>
+                    <button id="addFriend">Add Friend</button>
+                    <div id="chatWindow" class="hidden">
+                        <div id="chatMessages"></div>
+                        <input type="text" id="chatInput" placeholder="Type a message...">
+                        <button id="sendMessage">Send</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <p>Focus Flow &copy; 2023</p>
+            <button id="changeBackground">Change Background</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
